@@ -253,6 +253,7 @@
     /* ========= CONFIG ========= */
     const PRICE_EUR = 30;
     const FREE_SHIP_THRESHOLD = 60;
+    const VERSION = Date.now(); // anti-cache images
 
     /* ========= HELPERS ========= */
     const $ = s => document.querySelector(s);
@@ -275,11 +276,12 @@
       return cap(out);
     }
 
+    // --------- NOUVELLE VERSION ROBUSTE ----------
     function parseFilename(file){
       const base = file.replace(/\.[^.]+$/,'');
       let parts = base.split(/\s+/);
 
-      // verso si '2.1' est présent
+      // détecte '2.1' (verso) n'importe où
       const backIdx = parts.findIndex(p => p === '2.1');
       const isBack = backIdx !== -1;
       if(isBack) parts.splice(backIdx,1);
@@ -288,19 +290,23 @@
       const code = parts.shift();
       const club = CLUB_MAP[code] || `Code ${code}`;
 
-      // reste => modèle + optionnel année (2024 2025 | 2024/2025 | 2024-2025)
+      // reste du libellé
       let rest = parts.join(' ').trim();
-      let year = '';
-      const m = rest.match(/(20\d{2})\s*[-/ ]\s*(20\d{2})$/);
-      if(m){
-        year = `${m[1]}/${m[2]}`;
-        rest = rest.slice(0, m.index).trim();
-      }
-      const model = normalizeModel(rest || 'Modèle');
 
-      const key = `${code}__${model.toLowerCase()}__${year||'na'}`;
+      // récupère les deux dernières années "20xx" présentes (peu importe l'endroit)
+      const years = (rest.match(/20\d{2}/g) || []).slice(-2);
+      const year = years.length === 2 ? `${years[0]}/${years[1]}` : '';
+
+      // modèle lisible (retire les années)
+      const modelText = rest.replace(/20\d{2}/g,'').trim();
+      const model = normalizeModel(modelText || 'Modèle');
+
+      // Clé de regroupement : priorité au couple (code + années). Si pas d'années, on fallback sur (code + modèle).
+      const key = year ? `${code}__${year}` : `${code}__${model.toLowerCase()}`;
+
       return { file, code, club, model, year, isBack, key };
     }
+    // ---------------------------------------------
 
     /* ========= CATALOGUE AUTO ========= */
     async function loadClubMap(){
@@ -343,14 +349,14 @@
 
         const card = document.createElement('article');
         card.className = 'card';
-        card.setAttribute('data-product', JSON.stringify({ id, name:title, price:PRICE_EUR, image:`/images/${front}` }));
+        card.setAttribute('data-product', JSON.stringify({ id, name:title, price:PRICE_EUR, image:`/images/${front}?v=${VERSION}` }));
         card.innerHTML = `
           <div class="media">
             <span class="flag">Flocage offert</span>
-            <img class="main" src="/images/${front}" alt="${title}">
+            <img class="main" src="/images/${front}?v=${VERSION}" alt="${title}">
             <div class="thumbs">
-              <img src="/images/${front}" alt="Avant" title="Avant">
-              <img src="/images/${back}"  alt="Arrière" title="Arrière">
+              <img src="/images/${front}?v=${VERSION}" alt="Avant" title="Avant">
+              <img src="/images/${back}?v=${VERSION}"  alt="Arrière" title="Arrière">
             </div>
           </div>
           <div class="body">
