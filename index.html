@@ -1,41 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- ===================== SEO & META ===================== -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MonMaillot40 — Maillots officiels à 30€ | Flocage offert | Livraison dès 60€</title>
   <meta name="description" content="MonMaillot40 : maillots de foot à 30€. Flocage offert, livraison offerte dès 60€. Biscarrosse, France. Commande rapide et paiement sécurisé.">
-
-  <!-- Favicon ballon (SVG inline) -->
-  <link rel="icon" type="image/svg+xml"
-    href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="%23111827"/><path d="M60 22l20 10-4 22-16 10-16-10-4-22 20-10zM60 70l16 10 10-12-8-16M60 70L44 80 34 68l8-16" fill="%23fff" stroke="%23fff" stroke-linejoin="round" stroke-width="4"/></svg>' />
+  <link rel="icon" type="image/png" href="/images/logo.png" />
 
   <style>
     :root{
-      --bg:#f7f8fb; --panel:#ffffff; --muted:#eef1f6; --ink:#0e1320; --sub:#5b6374;
+      --bg:#f7f8fb; --panel:#ffffff; --ink:#0e1320; --sub:#5b6374;
       --brand:#111827; --ok:#16a34a; --blue:#2563eb; --border:#e5e7eb;
-      --radius:16px; --shadow:0 12px 32px rgba(16,24,40,.10);
+      --shadow:0 12px 32px rgba(16,24,40,.10);
     }
     *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto; position:relative; overflow-x:hidden}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto}
     a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
     .container{width:min(1200px,92vw);margin-inline:auto}
 
-    /* Fond animé discret */
+    /* Fond animé doux */
     body::before{
-      content:""; position:fixed; inset:-20% -20% auto -20%;
-      height:140vh; z-index:-1;
-      background: radial-gradient(80vmax 80vmax at 10% 10%, rgba(37,99,235,.06), transparent 60%),
-                  radial-gradient(70vmax 70vmax at 90% 20%, rgba(16,185,129,.06), transparent 60%),
-                  radial-gradient(90vmax 90vmax at 40% 120%, rgba(17,24,39,.05), transparent 60%);
-      animation: floatBG 22s linear infinite alternate;
-      filter: blur(4px);
+      content:""; position:fixed; inset:-20% -20% auto -20%; height:140vh; z-index:-1;
+      background:
+        radial-gradient(80vmax 80vmax at 10% 10%, rgba(37,99,235,.05), transparent 60%),
+        radial-gradient(70vmax 70vmax at 90% 20%, rgba(16,185,129,.05), transparent 60%),
+        radial-gradient(90vmax 90vmax at 40% 120%, rgba(17,24,39,.04), transparent 60%);
+      animation: floatBG 24s linear infinite alternate;
+      filter: blur(6px);
     }
-    @keyframes floatBG{
-      from{ transform: translate3d(0,0,0) scale(1); }
-      to  { transform: translate3d(-2%, -1%, 0) scale(1.02); }
-    }
+    @keyframes floatBG{ from{transform:translate3d(0,0,0) scale(1)} to{transform:translate3d(-2%,-1%,0) scale(1.02)} }
 
     .topbar{background:var(--brand);color:#fff}
     .topbar .container{display:flex;gap:12px;align-items:center;justify-content:center;padding:.55rem 1rem}
@@ -44,7 +37,6 @@
     header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
     .logo{display:flex;gap:.6rem;align-items:center;font-weight:900}
-    .logo i{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:var(--brand);color:#fff}
     .menu{display:flex;gap:.6rem;align-items:center}
     .menu a{padding:.55rem .85rem;border-radius:12px;color:#374151}
     .menu a:hover,.menu a[aria-current="page"]{background:#eef2ff;color:var(--ink)}
@@ -84,6 +76,7 @@
     footer{background:#fff;border-top:1px solid var(--border);padding:32px 0 64px}
     .foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px}
     @media (max-width:900px){.foot{grid-template-columns:1fr}}
+
     #cartDrawer{position:fixed;inset:0 0 0 auto;width:480px;max-width:100%;background:#fff;border-left:1px solid var(--border);transform:translateX(100%);transition:transform .3s ease;z-index:60;display:flex;flex-direction:column;box-shadow:var(--shadow)}
     #cartDrawer.open{transform:translateX(0)}
     .cart-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
@@ -112,14 +105,7 @@
   <header>
     <div class="container nav" role="navigation" aria-label="Navigation principale">
       <a href="#accueil" class="logo" aria-label="MonMaillot40">
-        <i aria-hidden="true">
-          <!-- Icône ballon dans le header -->
-          <svg width="22" height="22" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="60" cy="60" r="58" fill="#fff"/>
-            <circle cx="60" cy="60" r="54" fill="#111827"/>
-            <path d="M60 22l20 10-4 22-16 10-16-10-4-22 20-10zM60 70l16 10 10-12-8-16M60 70L44 80 34 68l8-16" fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="4"/>
-          </svg>
-        </i>
+        <img src="/images/logo.png" alt="Logo MonMaillot40" style="width:36px;height:36px;border-radius:10px;object-fit:cover">
         <span>MonMaillot40</span>
       </a>
       <nav class="menu" aria-label="Menu">
@@ -135,11 +121,10 @@
     </div>
   </header>
 
-  <!-- HERO sans le bloc "Règles de nommage" -->
   <section class="hero" aria-labelledby="titre-hero">
     <div class="container">
-      <div class="hero-card" style="position:relative;background:linear-gradient(120deg,#0f172a,#111827);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;min-height:360px">
-        <div class="hero-overlay" style="position:absolute;inset:0;display:grid;align-content:end;padding:18px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.5));color:#fff">
+      <div class="hero-card" style="position:relative;background:linear-gradient(120deg,#0f172a,#111827);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;min-height:300px">
+        <div class="hero-overlay" style="position:absolute;inset:0;display:grid;align-content:end;padding:18px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.45));color:#fff">
           <h1 id="titre-hero" style="margin:0 0 .4rem;font-size:clamp(1.9rem,3.3vw,3rem)">Maillots officiels à 30€ — flocage offert</h1>
           <p style="margin:0 0 10px">Expédition rapide • Livraison offerte dès 60€ • Paiement sécurisé</p>
           <div class="hero-cta" style="display:flex;gap:.6rem;flex-wrap:wrap">
@@ -163,8 +148,6 @@
   <section id="argumentaire" aria-labelledby="titre-arg">
     <div class="container">
       <h2 id="titre-arg">Pourquoi choisir MonMaillot40 ?</h2>
-    </div>
-    <div class="container">
       <div class="trust">
         <div class="item"><h3>✅ Authentique & Qualité</h3><p class="muted">Maillots officiels, tissus respirants, coupes pro. <strong>Flocage offert</strong>.</p></div>
         <div class="item"><h3>🚚 Livraison rapide</h3><p class="muted">Préparation express en France. <strong>Offerte dès 60€</strong>.</p></div>
@@ -219,6 +202,7 @@
         <span class="chip" id="st-4">4. Confirmation</span>
       </div>
 
+      <!-- Step 2: Livraison -->
       <form id="formShipping" class="card" style="padding:12px;display:none" onsubmit="event.preventDefault();gotoStep(3)">
         <h3 style="margin:0 0 8px">Adresse de livraison</h3>
         <label>Prénom & Nom</label><input id="shipName" required>
@@ -236,24 +220,21 @@
         <button class="btn primary" style="margin-top:12px">Continuer vers paiement</button>
       </form>
 
-      <form id="formPayment" class="card" style="padding:12px;display:none" onsubmit="event.preventDefault();confirmOrder()">
+      <!-- Step 3: Paiement -->
+      <form id="formPayment" class="card" style="padding:12px;display:none" onsubmit="event.preventDefault();payNow()">
         <h3 style="margin:0 0 8px">Paiement sécurisé</h3>
         <label>Méthode</label>
         <select id="payMethod">
           <option value="card">Carte (Visa/MasterCard)</option>
           <option value="paypal">PayPal</option>
         </select>
-        <div id="cardFields">
-          <label>Numéro de carte</label><input placeholder="4242 4242 4242 4242" inputmode="numeric" maxlength="19">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div><label>Expiration</label><input placeholder="MM/AA"></div>
-            <div><label>CVC</label><input placeholder="123" inputmode="numeric" maxlength="4"></div>
-          </div>
+        <div id="cardFields" class="muted" style="margin:.4rem 0">
+          Le paiement réel se fait sur Stripe Checkout (sécurisé).
         </div>
-        <p class="muted" style="margin:.6rem 0">En validant, tu acceptes nos <a href="#">CGV</a>.</p>
         <button class="btn primary">Payer maintenant</button>
       </form>
 
+      <!-- Step 4: Confirmation (non utilisée si Stripe) -->
       <div id="confirmBox" class="card" style="padding:12px;display:none">
         <h3 style="margin:0 0 8px">🎉 Commande confirmée</h3>
         <p class="muted">Merci ! Un email de confirmation a été envoyé.</p>
@@ -298,7 +279,7 @@
       return cap(out);
     }
 
-    /* Regroupement robuste par (code + années), détection verso via "2.1" */
+    // Parsing robuste : 2.1 = verso, années où qu’elles soient
     function parseFilename(file){
       const base = file.replace(/\.[^.]+$/,'');
       let parts = base.split(/\s+/);
@@ -311,18 +292,15 @@
       const club = CLUB_MAP[code] || `Code ${code}`;
 
       let rest = parts.join(' ').trim();
-
       const years = (rest.match(/20\d{2}/g) || []).slice(-2);
       const year = years.length === 2 ? `${years[0]}/${years[1]}` : '';
-
       const modelText = rest.replace(/20\d{2}/g,'').trim();
       const model = normalizeModel(modelText || 'Modèle');
-
       const key = year ? `${code}__${year}` : `${code}__${model.toLowerCase()}`;
-
       return { file, code, club, model, year, isBack, key };
     }
 
+    /* ========= CATALOGUE ========= */
     async function loadClubMap(){
       const res = await fetch('/club_map', {cache:'no-store'});
       CLUB_MAP = await res.json();
@@ -361,17 +339,14 @@
 
         const card = document.createElement('article');
         card.className = 'card';
-        card.setAttribute('data-product', JSON.stringify({
-          id, name:title, price:PRICE_EUR,
-          image:`/images/${encodeURIComponent(front)}?v=${VERSION}`
-        }));
+        card.setAttribute('data-product', JSON.stringify({ id, name:title, price:PRICE_EUR, image:`/images/${front}?v=${VERSION}` }));
         card.innerHTML = `
           <div class="media">
             <span class="flag">Flocage offert</span>
-            <img class="main" src="/images/${encodeURIComponent(front)}?v=${VERSION}" alt="${title}">
+            <img class="main" src="/images/${front}?v=${VERSION}" alt="${title}">
             <div class="thumbs">
-              <img src="/images/${encodeURIComponent(front)}?v=${VERSION}" alt="Avant" title="Avant">
-              <img src="/images/${encodeURIComponent(back)}?v=${VERSION}"  alt="Arrière" title="Arrière">
+              <img src="/images/${front}?v=${VERSION}" alt="Avant" title="Avant">
+              <img src="/images/${back}?v=${VERSION}"  alt="Arrière" title="Arrière">
             </div>
           </div>
           <div class="body">
@@ -400,9 +375,10 @@
       });
     }
 
-    /* ========= PANIER / CHECKOUT ========= */
+    /* ========= PANIER ========= */
     const cartKey='mm40_cart_v5';
     let cart = JSON.parse(localStorage.getItem(cartKey)||'[]');
+
     function openCart(){ $('#cartDrawer').classList.add('open'); renderCart(); }
     function closeCart(){ $('#cartDrawer').classList.remove('open'); }
     function updateCount(){ $('#cartCount').textContent = cart.reduce((a,i)=>a+i.qty,0); }
@@ -474,21 +450,54 @@
       renderTotals();
       if(n===2){ openCart(); const subtotal = cart.reduce((s,i)=> s + i.price*i.qty, 0); if(subtotal >= FREE_SHIP_THRESHOLD && $('#shipMethod')) $('#shipMethod').value='free'; }
     }
-    function confirmOrder(){
+
+    // ====== Paiement Stripe (appel API serveur) ======
+    async function payNow(){
       const required = ['shipName','shipEmail','shipAddr','shipCity','shipZip','shipCountry'];
-      for(const id of required){ if(!$('#'+id).value.trim()){ alert('Complète le champ requis.'); return; } }
-      const subtotal = cart.reduce((s,i)=> s + i.price*i.qty, 0);
-      const shipping = shippingCost(subtotal);
-      const total = Math.max(0, subtotal + shipping);
-      const lines = cart.map(i=>`• ${i.name} — ${i.size}${i.flock?` (${i.flock})`:''} × ${i.qty} — ${euro(i.price*i.qty)}`).join('\n');
-      const ship = `Livraison: ${$('#shipMethod').selectedOptions[0].text}`;
-      const info = `Client: ${$('#shipName').value}\nEmail: ${$('#shipEmail').value}\nAdresse: ${$('#shipAddr').value}, ${$('#shipZip').value} ${$('#shipCity').value}, ${$('#shipCountry').value}`;
-      const price = `Sous-total: ${euro(subtotal)}\nLivraison: ${euro(shipping)}\n\nTOTAL: ${euro(total)}`;
-      $('#orderSummary').textContent = `Commande #${Math.floor(Math.random()*899999+100000)}\n\nArticles:\n${lines}\n\n${ship}\n\n${info}\n\n${price}`;
-      gotoStep(4);
-      cart=[]; save(); renderTotals(); updateCount();
+      for(const id of required){
+        const el = document.getElementById(id);
+        if(!el || !el.value.trim()){ alert('Complète le champ requis : ' + id); return; }
+      }
+      if(cart.length === 0){ alert('Ton panier est vide.'); return; }
+
+      const items = cart.map(i => ({
+        id: i.id,
+        name: i.name,
+        image: i.image,
+        size: i.size,
+        flock: i.flock || "",
+        qty: i.qty,
+        unit_price: i.price
+      }));
+      const shipping = {
+        name: document.getElementById('shipName').value,
+        email: document.getElementById('shipEmail').value,
+        addr: document.getElementById('shipAddr').value,
+        city: document.getElementById('shipCity').value,
+        zip: document.getElementById('shipZip').value,
+        country: document.getElementById('shipCountry').value,
+        method: document.getElementById('shipMethod')?.value || 'std'
+      };
+
+      try{
+        const res = await fetch('/create-checkout-session', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ items, shipping })
+        });
+        const data = await res.json();
+        if(data.url){
+          localStorage.removeItem('mm40_cart_v5');
+          window.location.href = data.url;
+        }else{
+          alert(data.error || "Erreur de création du paiement.");
+        }
+      }catch(e){
+        alert("Erreur réseau: " + e.message);
+      }
     }
 
+    // Init
     (async () => {
       await loadClubMap();
       updateCount(); renderCart(); loadAndRender();
