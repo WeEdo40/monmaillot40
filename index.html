@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- ===================== SEO & META ===================== -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MonMaillot40 — Maillots officiels à 30€ | Flocage offert | Livraison dès 60€</title>
+  <meta name="description" content="MonMaillot40 : maillots de foot à 30€. Flocage offert, livraison offerte dès 60€. Biscarrosse, France. Commande rapide et paiement sécurisé.">
+
+  <style>
+    :root{
+      --bg:#f7f8fb; --panel:#ffffff; --muted:#eef1f6; --ink:#0e1320; --sub:#5b6374;
+      --brand:#111827; --ok:#16a34a; --blue:#2563eb; --border:#e5e7eb;
+      --radius:16px; --shadow:0 12px 32px rgba(16,24,40,.10);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+    .container{width:min(1200px,92vw);margin-inline:auto}
+
+    .topbar{background:var(--brand);color:#fff}
+    .topbar .container{display:flex;gap:12px;align-items:center;justify-content:center;padding:.55rem 1rem}
+    .badge{background:#fff;color:var(--brand);padding:.25rem .6rem;border-radius:999px;font-size:.8rem;font-weight:800}
+
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+    .logo{display:flex;gap:.6rem;align-items:center;font-weight:900}
+    .logo i{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:var(--brand);color:#fff}
+    .menu{display:flex;gap:.6rem;align-items:center}
+    .menu a{padding:.55rem .85rem;border-radius:12px;color:#374151}
+    .menu a:hover,.menu a[aria-current="page"]{background:#eef2ff;color:var(--ink)}
+    .cta{background:var(--brand);color:#fff;padding:.65rem 1.1rem;border-radius:12px;border:0;cursor:pointer;box-shadow:var(--shadow);font-weight:800}
+    .cart-btn{display:flex;gap:.5rem;align-items:center;background:#fff;border:1px solid var(--border);padding:.55rem .9rem;border-radius:12px;cursor:pointer}
+    .pill{background:var(--blue);color:#fff;border-radius:999px;font-weight:800;min-width:24px;text-align:center;padding:.1rem .45rem}
+
+    section{padding:34px 0}
+    h2{font-size:clamp(1.4rem,2.2vw,2.1rem);margin:0 0 8px}
+    .sub{color:#6b7280;margin:0 0 16px}
+
+    .grid{display:grid;gap:16px}
+    .grid.products{grid-template-columns:repeat(4,1fr)}
+    @media (max-width:1024px){.grid.products{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:860px){.grid.products{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.grid.products{grid-template-columns:1fr}}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+    .media{aspect-ratio:4/5;background:#f5f7fb;display:grid;place-items:center;position:relative}
+    .media img{width:100%;height:100%;object-fit:cover}
+    .thumbs{position:absolute;right:8px;bottom:8px;display:flex;gap:6px}
+    .thumbs img{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:#fff;cursor:pointer;object-fit:cover}
+    .flag{position:absolute;top:10px;left:10px;background:var(--ok);color:#fff;padding:.25rem .5rem;border-radius:10px;font-size:.8rem;font-weight:800}
+    .body{padding:12px}
+    .price{display:flex;align-items:center;gap:8px;font-weight:800}
+    .muted{color:#6b7280}
+    .options{display:flex;gap:8px;align-items:center;margin:.6rem 0}
+    select,input,textarea{background:#fff;color:var(--ink);border:1px solid var(--border);border-radius:12px;padding:.55rem .65rem;width:100%}
+    label{font-size:.9rem;color:#4b5563;margin-bottom:.25rem;display:block}
+    .actions{margin-top:auto;display:flex;gap:8px}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1rem;border-radius:12px;border:1px solid var(--border);background:#fff;color:var(--ink);cursor:pointer}
+    .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+    .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .trust .item{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+    @media (max-width:900px){.trust{grid-template-columns:1fr}}
+
+    footer{background:#fff;border-top:1px solid var(--border);padding:32px 0 64px}
+    .foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px}
+    @media (max-width:900px){.foot{grid-template-columns:1fr}}
+
+    #cartDrawer{position:fixed;inset:0 0 0 auto;width:480px;max-width:100%;background:#fff;border-left:1px solid var(--border);transform:translateX(100%);transition:transform .3s ease;z-index:60;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+    #cartDrawer.open{transform:translateX(0)}
+    .cart-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
+    .cart-body{padding:12px 16px;overflow:auto;flex:1}
+    .cart-item{display:grid;grid-template-columns:76px 1fr auto;gap:12px;align-items:center;padding:10px;border:1px solid var(--border);border-radius:12px;background:#fff;margin-bottom:10px}
+    .qty{display:flex;align-items:center;gap:6px}
+    .qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--ink);cursor:pointer}
+    .cart-foot{padding:14px 16px;border-top:1px solid var(--border);background:#fafafa}
+    .summary{display:grid;gap:8px;margin:10px 0}
+    .summary div{display:flex;align-items:center;justify-content:space-between}
+    .chip{padding:.35rem .6rem;border-radius:999px;background:#f3f4f6;border:1px solid var(--border);color:#374151}
+    .chip.active{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:800}
+    .empty{color:#6b7280;text-align:center;padding:24px}
+  </style>
+</head>
+
+<body id="accueil">
+  <div class="topbar">
+    <div class="container">
+      <span class="badge">30€ le maillot</span>
+      <strong>Flocage offert</strong>
+      <span class="badge">Livraison offerte dès 60€</span>
+    </div>
+  </div>
+
+  <header>
+    <div class="container nav" role="navigation" aria-label="Navigation principale">
+      <a href="#accueil" class="logo" aria-label="MonMaillot40"><i>⚽</i><span>MonMaillot40</span></a>
+      <nav class="menu" aria-label="Menu">
+        <a href="#accueil" aria-current="page">Accueil</a>
+        <a href="#produits">Produits</a>
+        <a href="#argumentaire">Pourquoi nous ?</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="cta" onclick="document.querySelector('#produits').scrollIntoView({behavior:'smooth'})">Achetez maintenant</button>
+        <button class="cart-btn" onclick="openCart()"><span>🛒</span><span>Panier</span> <span class="pill" id="cartCount">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="titre-hero">
+    <div class="container">
+      <div class="hero-card" style="position:relative;background:linear-gradient(120deg,#0f172a,#111827);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;min-height:360px">
+        <div class="hero-overlay" style="position:absolute;inset:0;display:grid;align-content:end;padding:18px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.5));color:#fff">
+          <h1 id="titre-hero" style="margin:0 0 .4rem;font-size:clamp(1.9rem,3.3vw,3rem)">Maillots officiels à 30€ — flocage offert</h1>
+          <p style="margin:0 0 10px">Expédition rapide • Livraison offerte dès 60€ • Paiement sécurisé</p>
+          <div class="hero-cta" style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <a href="#produits" class="btn primary">Voir les maillots</a>
+            <a href="#argumentaire" class="btn">Pourquoi nous ?</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card" style="padding:18px;border:1px solid var(--border);border-radius:16px;background:#fff">
+        <h2 style="margin:0 0 6px">Règles de nommage (auto)</h2>
+        <p class="sub" style="margin:0">• <strong>2.1</strong> = verso • <strong>1.x</strong> = sélection nationale (ex : 1.1 Allemagne, 1.2 France) • <strong>1</strong> = PSG • <strong>2</strong> = Real Madrid</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="produits" aria-labelledby="titre-produits">
+    <div class="container">
+      <h2 id="titre-produits">Catalogue</h2>
+      <p class="sub">Tout à <strong>30€</strong>. Flocage <strong>offert</strong>. Livraison <strong>offerte dès 60€</strong>.</p>
+      <div id="productGrid" class="grid products"></div>
+      <div id="empty" class="empty" style="display:none">Ajoute des photos dans le dossier <code>images/</code> puis recharge la page.</div>
+    </div>
+  </section>
+
+  <section id="argumentaire" aria-labelledby="titre-arg">
+    <div class="container">
+      <h2 id="titre-arg">Pourquoi choisir MonMaillot40 ?</h2>
+      <div class="trust">
+        <div class="item"><h3>✅ Authentique & Qualité</h3><p class="muted">Maillots officiels, tissus respirants, coupes pro. <strong>Flocage offert</strong>.</p></div>
+        <div class="item"><h3>🚚 Livraison rapide</h3><p class="muted">Préparation express en France. <strong>Offerte dès 60€</strong>.</p></div>
+        <div class="item"><h3>🔒 Paiement sécurisé</h3><p class="muted">Visa, MasterCard, PayPal. Retours sous 30 jours.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="titre-contact">
+    <div class="container">
+      <h2 id="titre-contact">Contact</h2>
+      <p class="sub">📧 <strong>MonMaillot@gmail.com</strong> • 📍 Biscarrosse, France</p>
+    </div>
+  </section>
+
+  <footer aria-labelledby="mentions">
+    <div class="container foot">
+      <div>
+        <h3 id="mentions">Mentions légales</h3>
+        <p class="muted">MonMaillot40 — Biscarrosse, France. Tous les maillots vendus sont <strong>authentiques</strong>.</p>
+        <p class="muted">CGV • Politique de confidentialité • Cookies</p>
+      </div>
+      <div>
+        <h3>Réseaux</h3>
+        <p class="muted"><a href="#">Instagram</a><br><a href="#">TikTok</a><br><a href="#">X (Twitter)</a></p>
+      </div>
+      <div>
+        <h3>Support</h3>
+        <p class="muted">MonMaillot@gmail.com<br>📍 Biscarrosse, France</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== PANIER & CHECKOUT (sans code promo) ===================== -->
+  <aside id="cartDrawer" aria-labelledby="titre-panier" aria-modal="true" role="dialog">
+    <div class="cart-head">
+      <strong id="titre-panier">🛒 Mon panier</strong>
+      <button class="btn" onclick="closeCart()">Fermer</button>
+    </div>
+    <div class="cart-body">
+      <div id="cartList"></div>
+      <div class="summary">
+        <div><span>Sous-total</span><strong id="sumSubtotal">0,00€</strong></div>
+        <div><span>Livraison</span><strong id="sumShipping">0,00€</strong></div>
+        <div><span>Total</span><strong id="sumTotal">0,00€</strong></div>
+      </div>
+
+      <div class="stepper" style="display:flex;gap:8px;margin:10px 0">
+        <span class="chip active" id="st-1">1. Panier</span>
+        <span class="chip" id="st-2">2. Livraison</span>
+        <span class="chip" id="st-3">3. Paiement</span>
+        <span class="chip" id="st-4">4. Confirmation</span>
+      </div>
+
+      <!-- Step 2: Livraison -->
+      <form id="formShipping" class="card" style="padding:12px;display:none" onsubmit="event.preventDefault();gotoStep(3)">
+        <h3 style="margin:0 0 8px">Adresse de livraison</h3>
+        <label>Prénom & Nom</label><input id="shipName" required>
+        <label>Email</label><input id="shipEmail" type="email" required>
+        <label>Adresse</label><input id="shipAddr" required>
+        <label>Ville</label><input id="shipCity" required>
+        <label>Code postal</label><input id="shipZip" required>
+        <label>Pays</label><input id="shipCountry" value="France" required>
+        <label>Méthode de livraison</label>
+        <select id="shipMethod" onchange="renderTotals()">
+          <option value="std">Standard 48h — 4,99€</option>
+          <option value="exp">Express 24h — 9,99€</option>
+          <option value="free">Gratuite (≥60€) — 0€</option>
+        </select>
+        <button class="btn primary" style="margin-top:12px">Continuer vers paiement</button>
+      </form>
+
+      <!-- Step 3: Paiement (simulé côté front) -->
+      <form id="formPayment" class="card" style="padding:12px;display:none" onsubmit="event.preventDefault();confirmOrder()">
+        <h3 style="margin:0 0 8px">Paiement sécurisé</h3>
+        <label>Méthode</label>
+        <select id="payMethod">
+          <option value="card">Carte (Visa/MasterCard)</option>
+          <option value="paypal">PayPal</option>
+        </select>
+        <div id="cardFields">
+          <label>Numéro de carte</label><input placeholder="4242 4242 4242 4242" inputmode="numeric" maxlength="19">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div><label>Expiration</label><input placeholder="MM/AA"></div>
+            <div><label>CVC</label><input placeholder="123" inputmode="numeric" maxlength="4"></div>
+          </div>
+        </div>
+        <p class="muted" style="margin:.6rem 0">En validant, tu acceptes nos <a href="#">CGV</a>.</p>
+        <button class="btn primary">Payer maintenant</button>
+      </form>
+
+      <!-- Step 4: Confirmation -->
+      <div id="confirmBox" class="card" style="padding:12px;display:none">
+        <h3 style="margin:0 0 8px">🎉 Commande confirmée</h3>
+        <p class="muted">Merci ! Un email de confirmation a été envoyé.</p>
+        <div id="orderSummary" class="muted" style="white-space:pre-wrap"></div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="btn" onclick="window.print()">Imprimer</button>
+          <button class="btn" onclick="closeCart()">Continuer mes achats</button>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div id="emptyState" class="empty">Ton panier est vide. Ajoute un maillot pour commencer !</div>
+    </div>
+    <div class="cart-foot">
+      <button class="btn" onclick="gotoStep(2)" id="checkoutBtn" style="width:100%">Passer à la livraison</button>
+    </div>
+  </aside>
+
+  <script>
+    /* ========= CONFIG ========= */
+    const PRICE_EUR = 30;
+    const FREE_SHIP_THRESHOLD = 60;
+
+    /* ========= HELPERS ========= */
+    const $ = s => document.querySelector(s);
+    const euro = n => (n||0).toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
+    const normalizeSpaces = s => (s||'').replace(/\s+/g,' ').trim();
+    const cap = s => s ? s.charAt(0).toUpperCase()+s.slice(1) : s;
+
+    let CLUB_MAP = {}; // récupéré depuis /club_map
+
+    function normalizeModel(s=''){
+      let out = normalizeSpaces(s);
+      const map = [
+        [/fourt\b/i,'fourth'],
+        [/domicil(e)?/i,'Domicile'],
+        [/exter(ieur|ior)?/i,'Extérieur'],
+        [/edition/i,'Edition'],
+        [/final/i,'Final'],
+      ];
+      map.forEach(([re,rep])=> out = out.replace(re,rep));
+      return cap(out);
+    }
+
+    function parseFilename(file){
+      const base = file.replace(/\.[^.]+$/,'');
+      let parts = base.split(/\s+/);
+
+      // verso si '2.1' est présent
+      const backIdx = parts.findIndex(p => p === '2.1');
+      const isBack = backIdx !== -1;
+      if(isBack) parts.splice(backIdx,1);
+
+      // code club (1er token) : '1', '2', '1.1', '1.2', ...
+      const code = parts.shift();
+      const club = CLUB_MAP[code] || `Code ${code}`;
+
+      // reste => modèle + optionnel année (2024 2025 | 2024/2025 | 2024-2025)
+      let rest = parts.join(' ').trim();
+      let year = '';
+      const m = rest.match(/(20\d{2})\s*[-/ ]\s*(20\d{2})$/);
+      if(m){
+        year = `${m[1]}/${m[2]}`;
+        rest = rest.slice(0, m.index).trim();
+      }
+      const model = normalizeModel(rest || 'Modèle');
+
+      const key = `${code}__${model.toLowerCase()}__${year||'na'}`;
+      return { file, code, club, model, year, isBack, key };
+    }
+
+    /* ========= CATALOGUE AUTO ========= */
+    async function loadClubMap(){
+      const res = await fetch('/club_map', {cache:'no-store'});
+      CLUB_MAP = await res.json();
+    }
+
+    async function loadAndRender(){
+      const grid = $('#productGrid');
+      const empty = $('#empty');
+      grid.innerHTML = '';
+
+      let files = [];
+      try{
+        const res = await fetch('/list_images', {cache:'no-store'});
+        files = await res.json();
+      }catch(e){
+        empty.style.display = 'block';
+        empty.textContent = "Impossible de récupérer la liste des images.";
+        return;
+      }
+
+      if(!files || !files.length){ empty.style.display = 'block'; return; }
+      empty.style.display = 'none';
+
+      // groupe recto/verso
+      const groups = {};
+      files.forEach(f=>{
+        const p = parseFilename(f);
+        if(!groups[p.key]) groups[p.key] = { club:p.club, model:p.model, year:p.year, front:null, back:null };
+        if(p.isBack) groups[p.key].back = f; else groups[p.key].front = f;
+      });
+
+      // cartes
+      Object.values(groups).forEach(g=>{
+        const title = `${g.club} — ${g.model}${g.year?(' '+g.year):''}`;
+        const front = g.front || g.back;
+        const back  = g.back  || g.front;
+        const id = (g.club+'-'+g.model+'-'+(g.year||'')).toLowerCase().replace(/[^\w]+/g,'-').replace(/-+/g,'-');
+
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.setAttribute('data-product', JSON.stringify({ id, name:title, price:PRICE_EUR, image:`/images/${front}` }));
+        card.innerHTML = `
+          <div class="media">
+            <span class="flag">Flocage offert</span>
+            <img class="main" src="/images/${front}" alt="${title}">
+            <div class="thumbs">
+              <img src="/images/${front}" alt="Avant" title="Avant">
+              <img src="/images/${back}"  alt="Arrière" title="Arrière">
+            </div>
+          </div>
+          <div class="body">
+            <h3 style="margin:.2rem 0">${title}</h3>
+            <div class="price"><span>${euro(PRICE_EUR)}</span><span class="muted"> • Livraison offerte dès 60€</span></div>
+            <div class="options">
+              <div style="width:48%">
+                <label>Taille</label>
+                <select><option value="">Sélectionner</option><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+              </div>
+              <div style="width:52%">
+                <label>Flocage (optionnel)</label>
+                <input placeholder="Nom & n° — OFFERT">
+              </div>
+            </div>
+            <div class="actions">
+              <button class="btn primary" onclick="addFromCard(this)">Ajouter au panier</button>
+              <button class="btn" onclick="quickBuy(this)">Achat express</button>
+            </div>
+          </div>
+        `;
+        const thumbs = card.querySelectorAll('.thumbs img');
+        const main = card.querySelector('.main');
+        thumbs.forEach(t => t.addEventListener('click', ()=> { main.src = t.src; }));
+        grid.appendChild(card);
+      });
+    }
+
+    /* ========= PANIER / CHECKOUT (front) ========= */
+    const cartKey='mm40_cart_v5';
+    let cart = JSON.parse(localStorage.getItem(cartKey)||'[]');
+
+    function openCart(){ $('#cartDrawer').classList.add('open'); renderCart(); }
+    function closeCart(){ $('#cartDrawer').classList.remove('open'); }
+    function updateCount(){ $('#cartCount').textContent = cart.reduce((a,i)=>a+i.qty,0); }
+    function save(){ localStorage.setItem(cartKey,JSON.stringify(cart)); updateCount(); }
+    function addFromCard(btn){
+      const card = btn.closest('.card');
+      const data = JSON.parse(card.getAttribute('data-product'));
+      const size = card.querySelector('select')?.value || '';
+      const flock = card.querySelector('input')?.value?.trim() || '';
+      if(!size){ alert('Choisis une taille'); return; }
+      addToCart({...data, size, flock, qty:1}); openCart();
+    }
+    function quickBuy(btn){ addFromCard(btn); gotoStep(2); }
+    function addToCart(item){
+      const idx = cart.findIndex(x => x.id===item.id && x.size===item.size && x.flock===item.flock);
+      if(idx>-1) cart[idx].qty += item.qty||1; else cart.push(item);
+      save(); renderCart();
+    }
+    function removeItem(index){ cart.splice(index,1); save(); renderCart(); }
+    function changeQty(index,delta){ cart[index].qty = Math.max(1, cart[index].qty + delta); save(); renderCart(); }
+    function shippingCost(sub){
+      const sel = $('#shipMethod')?.value || 'std';
+      if(sub>=FREE_SHIP_THRESHOLD) return 0;
+      return sel==='exp'?9.99:4.99;
+    }
+    function renderTotals(){
+      const subtotal = cart.reduce((s,i)=> s + i.price*i.qty, 0);
+      const shipping = shippingCost(subtotal);
+      $('#sumSubtotal').textContent = euro(subtotal);
+      $('#sumShipping').textContent = euro(shipping);
+      $('#sumTotal').textContent = euro(Math.max(0, subtotal + shipping));
+      if($('#shipMethod') && subtotal >= FREE_SHIP_THRESHOLD){ $('#shipMethod').value='free'; }
+    }
+    function renderCart(){
+      const list = $('#cartList'); list.innerHTML='';
+      if(cart.length===0){
+        $('#emptyState').style.display='block'; $('#checkoutBtn').disabled = true;
+      }else{
+        $('#emptyState').style.display='none'; $('#checkoutBtn').disabled = false;
+        cart.forEach((it,i)=>{
+          const el = document.createElement('div'); el.className='cart-item';
+          el.innerHTML=`<img src="${it.image}" alt="${it.name}">
+            <div><strong>${it.name}</strong>
+              <div class="muted">Taille: ${it.size}${it.flock?` • Flocage: ${it.flock}`:''} • <strong>Flocage offert</strong></div>
+              <div class="muted">${euro(it.price)} / unité</div>
+            </div>
+            <div style="text-align:right">
+              <div class="qty">
+                <button onclick="changeQty(${i},-1)">−</button>
+                <span>${it.qty}</span>
+                <button onclick="changeQty(${i},1)">+</button>
+              </div>
+              <button class="btn" style="margin-top:8px" onclick="removeItem(${i})">Retirer</button>
+            </div>`;
+          list.appendChild(el);
+        });
+      }
+      renderTotals();
+    }
+    function gotoStep(n){
+      if(n===2 && cart.length===0){ alert('Ajoute au moins un article.'); return; }
+      ['st-1','st-2','st-3','st-4'].forEach((id,i)=>{ const el=$('#'+id); if(el){ el.classList.toggle('active', i===n-1); }});
+      $('#cartList').style.display = (n===1)?'block':'none';
+      $('#formShipping').style.display = (n===2)?'block':'none';
+      $('#formPayment').style.display = (n===3)?'block':'none';
+      $('#confirmBox').style.display = (n===4)?'block':'none';
+      $('#emptyState').style.display = (cart.length===0 && n===1)?'block':'none';
+      $('#checkoutBtn').style.display = (n===1)?'block':'none';
+      renderTotals();
+      if(n===2){ openCart(); const subtotal = cart.reduce((s,i)=> s + i.price*i.qty, 0); if(subtotal >= FREE_SHIP_THRESHOLD && $('#shipMethod')) $('#shipMethod').value='free'; }
+    }
+    function confirmOrder(){
+      const required = ['shipName','shipEmail','shipAddr','shipCity','shipZip','shipCountry'];
+      for(const id of required){ if(!$('#'+id).value.trim()){ alert('Complète le champ requis.'); return; } }
+      const subtotal = cart.reduce((s,i)=> s + i.price*i.qty, 0);
+      const shipping = shippingCost(subtotal);
+      const total = Math.max(0, subtotal + shipping);
+      const lines = cart.map(i=>`• ${i.name} — ${i.size}${i.flock?` (${i.flock})`:''} × ${i.qty} — ${euro(i.price*i.qty)}`).join('\n');
+      const ship = `Livraison: ${$('#shipMethod').selectedOptions[0].text}`;
+      const info = `Client: ${$('#shipName').value}\nEmail: ${$('#shipEmail').value}\nAdresse: ${$('#shipAddr').value}, ${$('#shipZip').value} ${$('#shipCity').value}, ${$('#shipCountry').value}`;
+      const price = `Sous-total: ${euro(subtotal)}\nLivraison: ${euro(shipping)}\n\nTOTAL: ${euro(total)}`;
+      $('#orderSummary').textContent = `Commande #${Math.floor(Math.random()*899999+100000)}\n\nArticles:\n${lines}\n\n${ship}\n\n${info}\n\n${price}`;
+      gotoStep(4);
+      cart=[]; save(); renderTotals(); updateCount();
+    }
+
+    // Init: charge le mapping clubs PUIS le catalogue
+    (async () => {
+      await loadClubMap();
+      updateCount(); renderCart(); loadAndRender();
+    })();
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeCart(); });
+  </script>
+</body>
+</html>
