@@ -7,6 +7,10 @@
   <title>MonMaillot40 — Maillots officiels à 30€ | Flocage offert | Livraison dès 60€</title>
   <meta name="description" content="MonMaillot40 : maillots de foot à 30€. Flocage offert, livraison offerte dès 60€. Biscarrosse, France. Commande rapide et paiement sécurisé.">
 
+  <!-- Favicon ballon (SVG inline) -->
+  <link rel="icon" type="image/svg+xml"
+    href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="%23111827"/><path d="M60 22l20 10-4 22-16 10-16-10-4-22 20-10zM60 70l16 10 10-12-8-16M60 70L44 80 34 68l8-16" fill="%23fff" stroke="%23fff" stroke-linejoin="round" stroke-width="4"/></svg>' />
+
   <style>
     :root{
       --bg:#f7f8fb; --panel:#ffffff; --muted:#eef1f6; --ink:#0e1320; --sub:#5b6374;
@@ -14,9 +18,24 @@
       --radius:16px; --shadow:0 12px 32px rgba(16,24,40,.10);
     }
     *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto; position:relative; overflow-x:hidden}
     a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
     .container{width:min(1200px,92vw);margin-inline:auto}
+
+    /* Fond animé discret */
+    body::before{
+      content:""; position:fixed; inset:-20% -20% auto -20%;
+      height:140vh; z-index:-1;
+      background: radial-gradient(80vmax 80vmax at 10% 10%, rgba(37,99,235,.06), transparent 60%),
+                  radial-gradient(70vmax 70vmax at 90% 20%, rgba(16,185,129,.06), transparent 60%),
+                  radial-gradient(90vmax 90vmax at 40% 120%, rgba(17,24,39,.05), transparent 60%);
+      animation: floatBG 22s linear infinite alternate;
+      filter: blur(4px);
+    }
+    @keyframes floatBG{
+      from{ transform: translate3d(0,0,0) scale(1); }
+      to  { transform: translate3d(-2%, -1%, 0) scale(1.02); }
+    }
 
     .topbar{background:var(--brand);color:#fff}
     .topbar .container{display:flex;gap:12px;align-items:center;justify-content:center;padding:.55rem 1rem}
@@ -65,7 +84,6 @@
     footer{background:#fff;border-top:1px solid var(--border);padding:32px 0 64px}
     .foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px}
     @media (max-width:900px){.foot{grid-template-columns:1fr}}
-
     #cartDrawer{position:fixed;inset:0 0 0 auto;width:480px;max-width:100%;background:#fff;border-left:1px solid var(--border);transform:translateX(100%);transition:transform .3s ease;z-index:60;display:flex;flex-direction:column;box-shadow:var(--shadow)}
     #cartDrawer.open{transform:translateX(0)}
     .cart-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
@@ -93,7 +111,17 @@
 
   <header>
     <div class="container nav" role="navigation" aria-label="Navigation principale">
-      <a href="#accueil" class="logo" aria-label="MonMaillot40"><i>⚽</i><span>MonMaillot40</span></a>
+      <a href="#accueil" class="logo" aria-label="MonMaillot40">
+        <i aria-hidden="true">
+          <!-- Icône ballon dans le header -->
+          <svg width="22" height="22" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="58" fill="#fff"/>
+            <circle cx="60" cy="60" r="54" fill="#111827"/>
+            <path d="M60 22l20 10-4 22-16 10-16-10-4-22 20-10zM60 70l16 10 10-12-8-16M60 70L44 80 34 68l8-16" fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="4"/>
+          </svg>
+        </i>
+        <span>MonMaillot40</span>
+      </a>
       <nav class="menu" aria-label="Menu">
         <a href="#accueil" aria-current="page">Accueil</a>
         <a href="#produits">Produits</a>
@@ -107,6 +135,7 @@
     </div>
   </header>
 
+  <!-- HERO sans le bloc "Règles de nommage" -->
   <section class="hero" aria-labelledby="titre-hero">
     <div class="container">
       <div class="hero-card" style="position:relative;background:linear-gradient(120deg,#0f172a,#111827);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;min-height:360px">
@@ -134,6 +163,8 @@
   <section id="argumentaire" aria-labelledby="titre-arg">
     <div class="container">
       <h2 id="titre-arg">Pourquoi choisir MonMaillot40 ?</h2>
+    </div>
+    <div class="container">
       <div class="trust">
         <div class="item"><h3>✅ Authentique & Qualité</h3><p class="muted">Maillots officiels, tissus respirants, coupes pro. <strong>Flocage offert</strong>.</p></div>
         <div class="item"><h3>🚚 Livraison rapide</h3><p class="muted">Préparation express en France. <strong>Offerte dès 60€</strong>.</p></div>
@@ -167,7 +198,7 @@
     </div>
   </footer>
 
-  <!-- ===================== PANIER & CHECKOUT (sans code promo) ===================== -->
+  <!-- ===================== PANIER & CHECKOUT ===================== -->
   <aside id="cartDrawer" aria-labelledby="titre-panier" aria-modal="true" role="dialog">
     <div class="cart-head">
       <strong id="titre-panier">🛒 Mon panier</strong>
@@ -188,7 +219,6 @@
         <span class="chip" id="st-4">4. Confirmation</span>
       </div>
 
-      <!-- Step 2: Livraison -->
       <form id="formShipping" class="card" style="padding:12px;display:none" onsubmit="event.preventDefault();gotoStep(3)">
         <h3 style="margin:0 0 8px">Adresse de livraison</h3>
         <label>Prénom & Nom</label><input id="shipName" required>
@@ -206,7 +236,6 @@
         <button class="btn primary" style="margin-top:12px">Continuer vers paiement</button>
       </form>
 
-      <!-- Step 3: Paiement (simulé côté front) -->
       <form id="formPayment" class="card" style="padding:12px;display:none" onsubmit="event.preventDefault();confirmOrder()">
         <h3 style="margin:0 0 8px">Paiement sécurisé</h3>
         <label>Méthode</label>
@@ -225,7 +254,6 @@
         <button class="btn primary">Payer maintenant</button>
       </form>
 
-      <!-- Step 4: Confirmation -->
       <div id="confirmBox" class="card" style="padding:12px;display:none">
         <h3 style="margin:0 0 8px">🎉 Commande confirmée</h3>
         <p class="muted">Merci ! Un email de confirmation a été envoyé.</p>
@@ -236,7 +264,6 @@
         </div>
       </div>
 
-      <!-- Empty state -->
       <div id="emptyState" class="empty">Ton panier est vide. Ajoute un maillot pour commencer !</div>
     </div>
     <div class="cart-foot">
@@ -271,39 +298,31 @@
       return cap(out);
     }
 
-    // --------- NOUVELLE VERSION ROBUSTE ----------
+    /* Regroupement robuste par (code + années), détection verso via "2.1" */
     function parseFilename(file){
       const base = file.replace(/\.[^.]+$/,'');
       let parts = base.split(/\s+/);
 
-      // détecte '2.1' (verso) n'importe où
       const backIdx = parts.findIndex(p => p === '2.1');
       const isBack = backIdx !== -1;
       if(isBack) parts.splice(backIdx,1);
 
-      // code club (1er token) : '1', '2', '1.1', '1.2', ...
       const code = parts.shift();
       const club = CLUB_MAP[code] || `Code ${code}`;
 
-      // reste du libellé
       let rest = parts.join(' ').trim();
 
-      // récupère les deux dernières années "20xx" présentes (peu importe l'endroit)
       const years = (rest.match(/20\d{2}/g) || []).slice(-2);
       const year = years.length === 2 ? `${years[0]}/${years[1]}` : '';
 
-      // modèle lisible (retire les années)
       const modelText = rest.replace(/20\d{2}/g,'').trim();
       const model = normalizeModel(modelText || 'Modèle');
 
-      // Clé de regroupement : priorité au couple (code + années). Si pas d'années, on fallback sur (code + modèle).
       const key = year ? `${code}__${year}` : `${code}__${model.toLowerCase()}`;
 
       return { file, code, club, model, year, isBack, key };
     }
-    // ---------------------------------------------
 
-    /* ========= CATALOGUE AUTO ========= */
     async function loadClubMap(){
       const res = await fetch('/club_map', {cache:'no-store'});
       CLUB_MAP = await res.json();
@@ -327,7 +346,6 @@
       if(!files || !files.length){ empty.style.display = 'block'; return; }
       empty.style.display = 'none';
 
-      // groupe recto/verso
       const groups = {};
       files.forEach(f=>{
         const p = parseFilename(f);
@@ -335,7 +353,6 @@
         if(p.isBack) groups[p.key].back = f; else groups[p.key].front = f;
       });
 
-      // cartes
       Object.values(groups).forEach(g=>{
         const title = `${g.club} — ${g.model}${g.year?(' '+g.year):''}`;
         const front = g.front || g.back;
@@ -344,14 +361,17 @@
 
         const card = document.createElement('article');
         card.className = 'card';
-        card.setAttribute('data-product', JSON.stringify({ id, name:title, price:PRICE_EUR, image:`/images/${front}?v=${VERSION}` }));
+        card.setAttribute('data-product', JSON.stringify({
+          id, name:title, price:PRICE_EUR,
+          image:`/images/${encodeURIComponent(front)}?v=${VERSION}`
+        }));
         card.innerHTML = `
           <div class="media">
             <span class="flag">Flocage offert</span>
-            <img class="main" src="/images/${front}?v=${VERSION}" alt="${title}">
+            <img class="main" src="/images/${encodeURIComponent(front)}?v=${VERSION}" alt="${title}">
             <div class="thumbs">
-              <img src="/images/${front}?v=${VERSION}" alt="Avant" title="Avant">
-              <img src="/images/${back}?v=${VERSION}"  alt="Arrière" title="Arrière">
+              <img src="/images/${encodeURIComponent(front)}?v=${VERSION}" alt="Avant" title="Avant">
+              <img src="/images/${encodeURIComponent(back)}?v=${VERSION}"  alt="Arrière" title="Arrière">
             </div>
           </div>
           <div class="body">
@@ -380,10 +400,9 @@
       });
     }
 
-    /* ========= PANIER / CHECKOUT (front) ========= */
+    /* ========= PANIER / CHECKOUT ========= */
     const cartKey='mm40_cart_v5';
     let cart = JSON.parse(localStorage.getItem(cartKey)||'[]');
-
     function openCart(){ $('#cartDrawer').classList.add('open'); renderCart(); }
     function closeCart(){ $('#cartDrawer').classList.remove('open'); }
     function updateCount(){ $('#cartCount').textContent = cart.reduce((a,i)=>a+i.qty,0); }
@@ -470,7 +489,6 @@
       cart=[]; save(); renderTotals(); updateCount();
     }
 
-    // Init: charge le mapping clubs PUIS le catalogue
     (async () => {
       await loadClubMap();
       updateCount(); renderCart(); loadAndRender();
